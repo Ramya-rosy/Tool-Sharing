@@ -1,0 +1,51 @@
+{% comment %} {% extends "base_generic.html" %} {% endcomment %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users/CSS/item_detail.css' %}">
+    
+<div class="item-container">
+<p>
+    <h2> Details of the listing </h2>
+ </p>
+ <hr/>
+<div style="display: flex; justify-content: space-between;">
+    <div style="margin: 10px;">
+        <ul>
+            <li>
+                Name: {{ item.name }}
+            </li>
+            <li>
+                Category: {{ item.get_category_display }}
+            </li>
+            <li>
+                Availablity: {{ item.availability }}
+            </li>
+            {% comment %} <li>
+                Availablity Date: {{ item.date }}
+            </li> {% endcomment %}
+            <li>
+                Location: {{ item.location }}
+            </li>
+            <li>
+                Owner's email: {{ item.email }}
+            </li>
+            <li>
+                Comments: {{ item.comments }}
+            </li>
+            <li></li>
+          <li>  {% if user != owner %}
+       <a href="{% url 'chat_room' owner.id %}" class="button1">MESSAGE</a></li>
+         {% endif %}    
+        </ul>
+        
+    </div>
+    <div style="margin: 10px;">
+        <img src="{{ item.image.url }}" style="width: 300px; height: 300px;">
+    </div>
+</div>
+<hr/>
+</div>
+
+
+{% endblock %}

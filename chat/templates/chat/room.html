@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Room</title>
+    <style>
+        /* Add your CSS styling here */
+    </style>
+</head>
+<body>
+    <h1>Chat Room</h1>
+    <div id="chat-window">
+        <!-- Chat messages will be displayed here -->
+        {% for message in messages %}
+            <p><strong>{{ message.sender }}:</strong> {{ message.content }}</p>
+        {% endfor %}
+    </div>
+    <form id="chat-form" method="post" action="{% url 'send_message' %}">
+        {% csrf_token %}
+        <input type="text" name="message" placeholder="Type your message here...">
+        <button type="submit">Send</button>
+    </form>
+    <script>
+        // Add your JavaScript here for handling chat interactions
+    </script>
+</body>
+</html>

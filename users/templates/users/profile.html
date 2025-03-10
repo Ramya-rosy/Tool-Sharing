@@ -1,0 +1,176 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users/CSS/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<!--a href="{% url 'dashboard' %}" class="btn button2">Go back to Dashboard</a-->
+<div class="item-container">
+
+    <h1>{{ user.username }}'s Profile</h1>
+    <hr>
+    <h2>
+        Items Posted 
+        <span id="toggleItems" class="collapsed" style="cursor: pointer;"></span>
+    </h2>
+    <div id="itemsList">
+        {% if listings %}
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                {% if 'posted' in message.tags %}
+                    <div style="font-size: large" class="posted"><em>{{ message }}</em></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+            {% endif %}
+
+            {% for item in listings %}
+                <ul>
+                    <div style="display: flex; margin-top: 50px;">
+                        <div class="item-image" style="margin: 10px;">
+                            <img src="{{ item.image.url }}" style="width: 130px; height: 130px;">
+                        </div>
+                        <div class="item-details">
+                            <div><strong>Name:</strong> {{ item.name }}</div>
+                            <div><strong>Category:</strong> {{ item.get_category_display }}</div>
+                            <div><strong>Availability:</strong> {{ item.availability }}</div>
+                            <div><strong>Date:</strong> {{ item.date }}</div>
+                        </div>
+                        <div class="button1-container" style="margin-left: auto; margin-right: 30px;">
+                            <a href="{% url 'item_edit' item.id %}" class="button1">Edit</a>
+                            <a href="{% url 'item_delete' item.id %}" class="button1">Delete</a>
+                            <a href="{% url 'item_detail' item.id %}" class="button1">View detail</a>
+                        </div>
+                    </div>
+                </ul>
+            {% endfor %}
+
+        {% else %}
+            <p>You have no listings.</p>
+        {% endif %}
+    </div>
+
+    <hr/>
+    <h2>Items Borrowed</h2>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            {% if 'borrow' in message.tags %}
+                <div style="font-size: large" class="borrow"><em>{{ message }}</em></div>
+            {% endif %}
+        {% endfor %}
+    </div>
+        {% endif %}
+
+    <ul style="list-style-type: square;">
+      {% for borrow in borrowings %}
+        <li>
+            <a href="{% url 'item_detail' borrow.listing.id %}" class="detail_description">
+                {{ borrow.listing.name }}
+            </a>
+            <a  class="detail_description">
+            - status: {{ borrow.status }}&emsp;
+            {% if borrow.status == 'requested' %}
+                Your request was sent, wait for lender approval 
+                <a href="{% url 'item_request_cancel' borrow.id %}" class="btn button4-wide">Cancel Request</a>
+            {% elif borrow.status == 'accepted' %}
+                borrow request accepted
+                <br>
+                Message {{ borrow.lender }} for pickup - your due date is {{ borrow.due_date }}
+                <br>
+                <a href="{% url 'item_return' borrow.id %}" class="button4-wide">
+                    Return
+                </a>
+            {% elif borrow.status == 'returned' %}
+                waiting for return confirmation
+                <br><br>
+            {% endif %}
+            </a>
+            <br style="line-height: 20px;">
+        </li>
+      {% endfor %}
+    </ul>
+    <hr/>
+
+    <h2>Items needing your approval.</h2>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            {% if 'approval' in message.tags %}
+                <div style="font-size: large" class="approval"><em>{{ message }}</em></div>
+            {% endif %}
+        {% endfor %}
+    </div>
+        {% endif %}
+
+    <ul style="list-style-type: square;">
+        {% for lending in lendings %}
+        <li>
+            <p>
+                <a  class="detail_description">
+                {% if lending.status == 'requested' %}
+                    You have a new request for
+                    {% for item in listings %}
+                        {% if item == lending.listing %}
+                            <a href="{% url 'item_detail' item.id %}">
+                                {{ item.name }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                    by {{ lending.borrower }}&emsp;
+                    <br>
+                    <a href="{% url 'item_request_approve' lending.id %}" class="button4">
+                        Approve
+                    </a>&emsp;
+                    <a href="{% url 'item_request_reject' lending.id %}" class="button4">
+                        Reject
+                    </a>
+                {% elif lending.status == 'returned' %}
+                    Your
+                    <a href="{% url 'item_detail' lending.listing.id %}" class="detail_description">
+                        {{ lending.listing.name }}</a>
+                    was returned by {{ lending.borrower }}&emsp;
+                    <a href="{% url 'item_return_confirm' lending.id %}" class="button4-wide">
+                        Confirm Return
+                    </a>
+                </a>
+                {% elif lending.status == 'accepted' and lending.due_date < date %}
+                    Your {{ lending.listing.name }} was due for {{ lending.due_date }} 
+                    <br>
+                    Contact {{ lending.borrower }} for return
+                    <br>
+                    If the item was returned but not marked as return press
+                    <a href="{% url 'item_return_override' lending.id %}" class="button5">
+                        This</a>
+                {% endif %}
+                </a>
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
+    <hr/>
+    <!--a href="{% url 'logout' %}" class="btn button3">Logout</a-->
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      var toggleItems = document.getElementById("toggleItems");
+      var itemsList = document.getElementById("itemsList");
+
+      if (toggleItems && itemsList) {
+          toggleItems.addEventListener("click", function() {
+              itemsList.classList.toggle("show");
+              toggleItems.classList.toggle("expanded");
+          });
+      }
+  });
+</script>
+{% endblock %}

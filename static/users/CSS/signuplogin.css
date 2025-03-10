@@ -1,0 +1,126 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.form-container {
+    margin-top: 60px;
+    margin-bottom: 120px;
+}
+
+form {
+    background-color: #e7f0d6;
+    max-width: 500px;
+    margin: 0 auto; 
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
+    color: #007bff;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.button-container {
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #20c997;
+    border: 1px solid #20c997;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #17a2b8;
+    border-color: #117a8b;
+}
+
+img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+}
+
+.operation-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.member-operation {
+    font-size: 18px;
+    color: #555;
+    font-weight: bold;
+}
+
+.member-operation a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #f1f1f1;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.member-operation a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.home-link {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.home-link a {
+    color: #20c997;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.home-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    form {
+        padding: 20px;
+        margin: 20px;
+    }
+}

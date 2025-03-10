@@ -1,0 +1,97 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'users/CSS/listingstyles.css' %}">
+{% endblock %}
+
+{% block content %}
+<p>
+    <h1 style="margin-bottom:0;">List of tools</h1>
+</p>
+<hr>
+<p>
+    <form method="get" action="{% url 'search' %}">
+        <div class="search-filter-container">
+            <input type="text" id="search-input" name="q" placeholder="Search by name or location" value="{{ request.GET.q }}">
+            <button type="submit">Search</button>
+
+            <!-- Filter by Availability -->
+            <label for="availability">Filter by Availability:</label>
+            <select name="availability" id="availability">
+                <option value="">Any</option>
+                <option value="available" {% if request.GET.availability == 'available' %}selected{% endif %}>Available</option>
+                <option value="unavailable" {% if request.GET.availability == 'unavailable' %}selected{% endif %}>Unavailable</option>
+            </select>
+
+            <!-- Filter by Category -->
+            <label for="category">Filter by Category:</label>
+            <select name="category" id="category">
+                <option value="">Any</option>
+                <option value="mechanic" {% if request.GET.category == 'mechanic' %}selected{% endif %}>Mechanical</option>
+                <option value="chemical" {% if request.GET.category == 'chemical' %}selected{% endif %}>Chemical</option>
+                <option value="electrical" {% if request.GET.category == 'electrical' %}selected{% endif %}>Electrical</option>  
+            </select>
+
+            <button type="submit" class="filter-button">Apply Filters</button>
+        </div>
+    </form>
+</p>
+
+{% if no_results %}
+<p>No listings match the specified name or location.</p>
+{% else %}
+{% for device in devices %}
+<div class="listing-item">
+    <div style="margin: 10px;">
+        <img src="{{ device.image.url }}" style="width: 100px; height: 100px;">
+    </div>
+    <div class="item-info">
+        <p>{{ device.name }}</p>
+        <p>{{ device.get_category_display }}</p>
+        <p>{{ device.location }}</p>
+    </div>
+    <div class="button-container">
+        <a class="btn-primary" href="{% url 'item_detail' device.id %}">View detail</a>
+        {% if device.id in borrowings %}
+            *Already borrowed
+        {% else %}
+            <a class="btn-primary" href="{% url 'item_request' device.id %}">Borrow</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endfor %}
+
+{% for item in listings %}
+<div class="listing-item">
+    <div style="margin: 10px;">
+        <img src="{{ item.image.url }}" style="width: 100px; height: 100px;">
+    </div>
+    <div class="item-info">
+        <p>{{ item.name }}</p>
+        <p>{{ item.get_category_display }}</p>
+        <p>Availability: {{ item.availability }}</p>
+        <p>{{ item.date }}</p>
+    </div>
+    <div class="button-container">
+        <a class="btn-primary" href="{% url 'item_detail' item.id %}">View detail</a>
+        {% if item.id in borrowings %}
+         *Already borrowed
+        {% else %}
+            <a class="btn-primary" href="{% url 'item_request' item.id %}">Borrow</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endfor %}
+{% endif %}
+
+<script>
+    document.getElementById('search-input').addEventListener('input', function() {
+        if (this.value === '') {
+            window.location.href = '{% url "listings" %}';
+        }
+    });
+</script>
+{% endblock %}

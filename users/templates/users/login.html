@@ -1,0 +1,23 @@
+{% comment %} {% extends "base_generic.html" %} {% endcomment %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'users/CSS/signuplogin.css' %}">
+  <div class="form-container">
+    <form method="post">
+      <h1>Login</h1>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="button-container">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+      <div class="operation-container">
+        <p class="member-operation">Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+      </div>
+      <div class="home-link">
+        <a href="{% url 'home' %}">HOME</a>
+      </div>
+      <img src="{% static 'users/images/c.jpg' %}" alt="Image C">
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block title %}Study Equipment Tools Sharing Platform{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+{% endblock %}
+{% block header %}
+    <header>
+        <img src="{% static 'core/images/share.jpeg' %}" alt="Share Image">
+    </header>
+{% endblock %}
+
+{% block content %}
+
+<section class="about-us">
+
+    <h1>About Us</h1>
+    <p>Welcome to Tools Sharing, the platform where you can share and borrow tools within your community. Our mission is to make tools accessible to everyone, promoting sustainability and helping people save money. Whether you need a drill for a quick fix or a lawnmower for the weekend, our platform connects you with people who have the tools you need.</p>
+    <p>Join us today and become part of a sharing community that values cooperation and resourcefulness. By sharing tools, we reduce waste and create a network of support among neighbors.</p>
+    <p>Our platform is easy to use: simply sign up, browse available tools, and make a request. If you have tools to share, list them on the platform and help others in your community. Together, we can build a more sustainable future.</p>
+    
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+    <!-- <script src="{% static 'js/scripts.js' %}"></script> -->
+{% endblock %}
+

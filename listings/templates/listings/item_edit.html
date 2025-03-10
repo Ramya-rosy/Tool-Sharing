@@ -1,0 +1,19 @@
+{% comment %} {% extends "base_generic.html" %} {% endcomment %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'users/CSS/item_edit.css' %}">
+<div class="item-container">
+<p>
+    <h3> Edit the selected listing </h3>
+ </p>
+ <hr/>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="button-container">
+    <button type="submit" class="button">Submit</button>
+</div>
+</form>
+</div>
+{% endblock %}

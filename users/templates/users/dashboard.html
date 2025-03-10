@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users/CSS/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Dashboard</h2>
+    <hr/>
+    <p>What would you like to explore today?</p>
+    <div class="actions-container">
+        <a href="{% url 'post_item' %}" class="action-btn">Add new item to the list</a>
+        <a href="{% url 'listings' %}" class="action-btn">View our listings</a>
+        <a href="{% url 'profile' %}" class="action-btn">Profile</a>
+    </div>
+</div>
+{% endblock %}

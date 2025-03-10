@@ -1,0 +1,195 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 0; /* Ensure there's no bottom margin to avoid overlapping with hr */
+    font-weight: bold;
+    font-size: 2.5em;
+}
+
+hr {
+    width: 80%;
+    margin: 10px auto; /* Adjust margin for spacing */
+    /*border: 1px solid black;Make the hr tag black */
+   /* border-top: 1px solid black; Ensure it's the top border that is black */
+    border: 1px solid #ced4da;
+    
+ 
+}
+
+/* Centering the Content */
+.search-filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+    padding-top: 10px; /* Added padding to prevent overlap with the nav bar */
+}
+
+.search-filter-container input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1; /* This will make the search bar take up the remaining space */
+    max-width: 300px; /* Optional: limit the width of the search bar */
+}
+
+.search-filter-container button {
+    padding: 10px 15px; /* Adjust padding for better spacing */
+    border-radius: 4px;
+    background-color: #90eebf;
+    color: black;
+    border: 1px solid #90eebf;
+    cursor: pointer;
+}
+
+.search-filter-container button:hover {
+    background-color: #90ef90;
+    border-color: #90ef90;
+}
+
+.search-filter-container label {
+    align-self: center;
+    margin-right: 5px;
+}
+
+.search-filter-container select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.filter-button {
+    margin-left: 10px; /* Adjust margin to create spacing */
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    background-color: #90eebf;
+    color: black;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block; /* Display buttons inline */
+    text-align: center; /* Center the text */
+    margin: 5px; /* Add some margin to space them out */
+}
+
+.btn-primary:hover {
+    background-color: #90ef90;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    background-color: #fff;
+    max-width: 1200px;
+    margin: 20px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the main content */
+}
+
+/* Device and Item Listing */
+.listing-item {
+    display: flex;
+    justify-content: space-between; /* Align items to the sides */
+    align-items: center;
+    margin: 10px 0;
+    padding: 20px;
+    background-color:white;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 600px; /* Limit the width of each listing item */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.listing-item img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    border-radius: 4px;
+}
+
+.listing-item p {
+    margin: 5px 0;
+}
+
+.item-info {
+    flex: 1; /* Take up remaining space */
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column; /* Align buttons vertically */
+    align-items: flex-end; /* Align buttons to the right */
+    gap: 3px; 
+}
+
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    header img {
+        width: 70%;
+    }
+
+    .nav-wrapper {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #nav-mobile {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header img {
+        width: 80%;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    .search-filter-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-button {
+        margin-left: 0;
+    }
+
+    .listing-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .button-container {
+        justify-content: center; /* Center buttons for mobile view */
+    }
+}

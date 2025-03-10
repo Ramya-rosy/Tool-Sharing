@@ -1,0 +1,24 @@
+# Ignore environment files
+.env
+*.pyc
+__pycache__/
+
+# Ignore virtual environment
+venv/
+ramya/  # Conda environment
+
+# Ignore Django migrations
+*/migrations/
+
+# Ignore database files
+*.sqlite3
+db.sqlite3
+
+# Ignore static & media files (optional)
+staticfiles/
+media/
+
+# Ignore system files
+.DS_Store
+.idea/
+.vscode/

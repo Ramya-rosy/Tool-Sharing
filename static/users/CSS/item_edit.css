@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+
+
+
+.item-container {
+    background-color: #ffff;
+    max-width: 600px;
+    margin: 100px auto 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item-container h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+input[type="text"], input[type="email"], input[type="file"], input[type="number"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: 1.25px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #90eebf;
+    /* font-size: 16px; */
+}
+
+.button-container {
+    text-align: center;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #90eebf;
+    color: black;
+    border: 1.75px solid black ;
+    border-radius: 4px;
+    font-weight: bold ;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #90ef90;
+}
+

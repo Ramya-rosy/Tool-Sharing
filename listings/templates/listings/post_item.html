@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'users/CSS/newitemstyles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Post an item to the listing</h2>
+    <hr/>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

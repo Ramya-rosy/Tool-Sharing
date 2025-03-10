@@ -1,0 +1,43 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Room</title>
+</head>
+<body>
+    <h1>Chat with {{ recipient.username }}</h1>
+    <div id="messages">
+        {% for message in messages %}
+            <p>{{ message.content }}</p>
+        {% endfor %}
+    </div>
+    <form id="messageForm" action="{% url 'send_message' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="recipient_id" value="{{ recipient.id }}">
+        <input type="text" id="messageInput" name="content">
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html> {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Room</title>
+</head>
+<body>
+    <h1>Chat with {{ recipient.username }}</h1>
+    <div id="messages">
+        {% for message in messages %}
+            <p>{{ message.sender.username }}: {{ message.content }}</p>
+        {% endfor %}
+    </div>
+    <form id="messageForm" action="{% url 'send_message' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="recipient_id" value="{{ recipient.id }}">
+        <input type="text" id="messageInput" name="content">
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>

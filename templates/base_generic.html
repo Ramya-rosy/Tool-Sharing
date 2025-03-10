@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Study Equipment Tools Sharing Platform{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding-top: 70px; /* Adjust this value based on the height of your nav bar */
+        }
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            z-index: 10;
+            top: 0;
+        }
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .nav-wrapper h3 {
+            font-size: 1.5;
+            font-weight: bold;
+            margin: 0;
+        }
+        .nav-wrapper img {
+            height: 50px;
+        }
+        #nav-mobile {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+        }
+        #nav-mobile li {
+            display: inline;
+        }
+        #nav-mobile a {
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            background-color: #90eebf;
+            color: black;
+            border: 1px solid #90eebf;
+            text-decoration: none;
+        }
+        #nav-mobile a:hover {
+            background-color: #90ef90;
+            border-color: #90ef90;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <img src="{% static 'core/images/logo.jpeg' %}" alt="Logo Image">
+            <h3>EduTools Exchange - Student Tool Sharing Platform</h3>
+            <ul id="nav-mobile">
+                {% if user.is_authenticated %}
+                    {% if not request.path == '/users/dashboard/' %}
+                         <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                     {% endif %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <main>
+        {% block header %}{% endblock %}
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
+
